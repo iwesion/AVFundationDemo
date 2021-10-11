@@ -46,10 +46,14 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let speechSynthesisVC = SpeechSynthesisViewController.init()
         let captureVC = CaptureViewController.init()
+        let faceRecognitionVC = FaceRecognitionViewController.init()
+        
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(speechSynthesisVC, animated: true)
         }else if (indexPath.row == 1){
             self.navigationController?.pushViewController(captureVC, animated: true)
+        }else if(indexPath.row == 2){
+            self.navigationController?.pushViewController(faceRecognitionVC, animated: true)
         }
         
         
