@@ -27,7 +27,12 @@ class FaceRecognitionViewController: UIViewController {
         btn.setTitle("取消✨", for: .selected)
         return btn
     }()
-    
+    let btn1:UIButton = {
+        let btn = UIButton.init(type: UIButton.ButtonType.custom )
+        btn.setTitle("切换摄像头", for: .normal)
+        btn.setTitle("取消✨", for: .selected)
+        return btn
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,19 @@ class FaceRecognitionViewController: UIViewController {
             make.width.equalTo(150)
             make.height.equalTo(50)
         }
+        
+        
+        self.view.addSubview(btn1)
+        btn1.backgroundColor = .red
+        btn1.addTarget(self, action: #selector(chgSelectBtn1(_:)), for: .touchUpInside)
+        btn1.snp.makeConstraints { make in
+            make.bottom.equalTo(-150)
+            make.centerX.equalTo(self.view)
+            make.width.equalTo(150)
+            make.height.equalTo(50)
+        }
+        
+        
         self.setupCaptureManager()
     }
     func setupCaptureManager() {
@@ -202,7 +220,9 @@ class FaceRecognitionViewController: UIViewController {
         sender.isSelected = !sender.isSelected
         showStar = sender.isSelected
     }
-    
+    @objc func chgSelectBtn1(_ sender:UIButton) {
+        captureManager.changeCamera()
+    }
     
     
     

@@ -46,6 +46,60 @@ class CaptureManager: NSObject {
             completion(isSuccess,error)
         }
     }
+    //摄像头变更
+    public func changeCamera(){
+        let devicess = AVCaptureDevice.devices(for: AVMediaType.video)
+        if devicess.count>1 {
+            // 如果当前是后置摄像头，就便利设备，找到前置摄像头，进行切换
+            if activeCamera?.device.position == .back{
+                for device in devicess {
+                    if device.position == .front {
+                        do {
+                            let deviceInput:AVCaptureDeviceInput = try AVCaptureDeviceInput.init(device: device)
+                            // 开始配置
+                            captureSession.beginConfiguration()
+                            captureSession.removeInput(activeCamera!)
+                            captureSession.canSetSessionPreset(.high)
+                            if captureSession.canAddInput(deviceInput) {
+                                captureSession.addInput(deviceInput)
+                                activeCamera = deviceInput
+                            }else{
+                                captureSession.addInput(activeCamera!)
+                            }
+                            captureSession.commitConfiguration()
+                        } catch {
+
+                            return
+                        }
+                    }
+                }
+
+            }else{
+                for device in devicess {
+                    if device.position == .back {
+                        do {
+                            let deviceInput:AVCaptureDeviceInput = try AVCaptureDeviceInput.init(device: device)
+                            // 开始配置
+                            captureSession.beginConfiguration()
+                            captureSession.removeInput(activeCamera!)
+                            captureSession.canSetSessionPreset(.high)
+                            if captureSession.canAddInput(deviceInput) {
+                                captureSession.addInput(deviceInput)
+                                activeCamera = deviceInput
+                            }else{
+                                captureSession.addInput(activeCamera!)
+                            }
+                            captureSession.commitConfiguration()
+                        } catch {
+
+                            return
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //
     private func setupSessionInput(completion:SetupCompletionHandler) {
         let deviceError = NSError.init(
             domain: "com.session.error",
