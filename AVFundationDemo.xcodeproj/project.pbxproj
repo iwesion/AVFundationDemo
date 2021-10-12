@@ -14,8 +14,6 @@
 		202DD85C27118D1900FC387B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 202DD85B27118D1900FC387B /* Assets.xcassets */; };
 		202DD85F27118D1900FC387B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 202DD85D27118D1900FC387B /* LaunchScreen.storyboard */; };
 		202DD87327118DD900FC387B /* SpeechSynthesisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD86727118DD800FC387B /* SpeechSynthesisViewController.swift */; };
-		202DD87427118DD900FC387B /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD86A27118DD900FC387B /* PreviewView.swift */; };
-		202DD87527118DD900FC387B /* FaceRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD86B27118DD900FC387B /* FaceRecognition.swift */; };
 		202DD87627118DD900FC387B /* WriteVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD86D27118DD900FC387B /* WriteVideo.swift */; };
 		202DD87727118DD900FC387B /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD86E27118DD900FC387B /* CaptureViewController.swift */; };
 		202DD87827118DD900FC387B /* FilterSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD87127118DD900FC387B /* FilterSettingView.swift */; };
@@ -35,8 +33,6 @@
 		202DD85E27118D1900FC387B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		202DD86027118D1900FC387B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		202DD86727118DD800FC387B /* SpeechSynthesisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSynthesisViewController.swift; sourceTree = "<group>"; };
-		202DD86A27118DD900FC387B /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
-		202DD86B27118DD900FC387B /* FaceRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceRecognition.swift; sourceTree = "<group>"; };
 		202DD86D27118DD900FC387B /* WriteVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteVideo.swift; sourceTree = "<group>"; };
 		202DD86E27118DD900FC387B /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		202DD87127118DD900FC387B /* FilterSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSettingView.swift; sourceTree = "<group>"; };
@@ -117,8 +113,6 @@
 		202DD86927118DD900FC387B /* 人脸识别 */ = {
 			isa = PBXGroup;
 			children = (
-				202DD86A27118DD900FC387B /* PreviewView.swift */,
-				202DD86B27118DD900FC387B /* FaceRecognition.swift */,
 				202DD87D2713D48600FC387B /* FaceRecognitionViewController.swift */,
 			);
 			path = "人脸识别";
@@ -289,10 +283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				202DD87527118DD900FC387B /* FaceRecognition.swift in Sources */,
 				202DD87727118DD900FC387B /* CaptureViewController.swift in Sources */,
 				202DD87C2713D42400FC387B /* CaptureManager.swift in Sources */,
-				202DD87427118DD900FC387B /* PreviewView.swift in Sources */,
 				202DD85727118D1500FC387B /* ViewController.swift in Sources */,
 				202DD87E2713D48600FC387B /* FaceRecognitionViewController.swift in Sources */,
 				202DD87827118DD900FC387B /* FilterSettingView.swift in Sources */,
