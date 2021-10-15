@@ -10,7 +10,7 @@ import AVFoundation
 import SnapKit
 class ViewController: UIViewController{
 
-    let arr = ["语音合成","滤镜","人脸识别"]
+    let arr = ["语音合成","滤镜","人脸识别","裁剪"]
     
     lazy var engine = AVAudioEngine()
     lazy var mixer = AVAudioMixerNode()
@@ -47,6 +47,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         let speechSynthesisVC = SpeechSynthesisViewController.init()
         let captureVC = CaptureViewController.init()
         let faceRecognitionVC = FaceRecognitionViewController.init()
+        let tailorVC = TailorViewController.init()
         
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(speechSynthesisVC, animated: true)
@@ -54,6 +55,8 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(captureVC, animated: true)
         }else if(indexPath.row == 2){
             self.navigationController?.pushViewController(faceRecognitionVC, animated: true)
+        }else{
+            self.navigationController?.pushViewController(tailorVC, animated: true)
         }
         
         

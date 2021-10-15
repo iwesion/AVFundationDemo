@@ -20,6 +20,11 @@
 		202DD87927118DD900FC387B /* XFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD87227118DD900FC387B /* XFilter.swift */; };
 		202DD87C2713D42400FC387B /* CaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD87B2713D42400FC387B /* CaptureManager.swift */; };
 		202DD87E2713D48600FC387B /* FaceRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD87D2713D48600FC387B /* FaceRecognitionViewController.swift */; };
+		202DD8BB2716C3F000FC387B /* TailorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD8BA2716C3F000FC387B /* TailorViewController.swift */; };
+		202DD8BF2716CC0C00FC387B /* HSScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD8BE2716CC0C00FC387B /* HSScreen.swift */; };
+		202DD8C12716D7BB00FC387B /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 202DD8C02716D17C00FC387B /* 01_nebula.mp4 */; };
+		202DD8C32716E3F900FC387B /* hali.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 202DD8C22716E3E200FC387B /* hali.mp4 */; };
+		202DD8FF2718102100FC387B /* TrailorSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD8FE2718102100FC387B /* TrailorSideView.swift */; };
 		39D42C2C927F396930A97237 /* Pods_AVFundationDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F786BD2CFBC3E7DC165E0EE8 /* Pods_AVFundationDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +44,11 @@
 		202DD87227118DD900FC387B /* XFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFilter.swift; sourceTree = "<group>"; };
 		202DD87B2713D42400FC387B /* CaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureManager.swift; sourceTree = "<group>"; };
 		202DD87D2713D48600FC387B /* FaceRecognitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceRecognitionViewController.swift; sourceTree = "<group>"; };
+		202DD8BA2716C3F000FC387B /* TailorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailorViewController.swift; sourceTree = "<group>"; };
+		202DD8BE2716CC0C00FC387B /* HSScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSScreen.swift; sourceTree = "<group>"; };
+		202DD8C02716D17C00FC387B /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
+		202DD8C22716E3E200FC387B /* hali.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hali.mp4; sourceTree = "<group>"; };
+		202DD8FE2718102100FC387B /* TrailorSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailorSideView.swift; sourceTree = "<group>"; };
 		606480137AB59631988E8150 /* Pods-AVFundationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFundationDemo.debug.xcconfig"; path = "Target Support Files/Pods-AVFundationDemo/Pods-AVFundationDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		7AA61687EBC981972076C00E /* Pods-AVFundationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFundationDemo.release.xcconfig"; path = "Target Support Files/Pods-AVFundationDemo/Pods-AVFundationDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F786BD2CFBC3E7DC165E0EE8 /* Pods_AVFundationDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AVFundationDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +87,9 @@
 		202DD85127118D1500FC387B /* AVFundationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				202DD8BD2716CBE800FC387B /* Helper */,
+				202DD8BC2716C8C000FC387B /* Resource */,
+				202DD8B82716C3C400FC387B /* 裁剪 */,
 				202DD86827118DD900FC387B /* 录制capture */,
 				202DD86F27118DD900FC387B /* 滤镜 */,
 				202DD86627118DD800FC387B /* 语音合成 */,
@@ -149,6 +162,40 @@
 				202DD87B2713D42400FC387B /* CaptureManager.swift */,
 			);
 			path = CaptureManager;
+			sourceTree = "<group>";
+		};
+		202DD8B82716C3C400FC387B /* 裁剪 */ = {
+			isa = PBXGroup;
+			children = (
+				202DD8FD27180FF200FC387B /* View */,
+				202DD8BA2716C3F000FC387B /* TailorViewController.swift */,
+			);
+			path = "裁剪";
+			sourceTree = "<group>";
+		};
+		202DD8BC2716C8C000FC387B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				202DD8C22716E3E200FC387B /* hali.mp4 */,
+				202DD8C02716D17C00FC387B /* 01_nebula.mp4 */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		202DD8BD2716CBE800FC387B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				202DD8BE2716CC0C00FC387B /* HSScreen.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		202DD8FD27180FF200FC387B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				202DD8FE2718102100FC387B /* TrailorSideView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		7523ACF1C244EB529EDC6E89 /* Frameworks */ = {
@@ -228,6 +275,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202DD8C32716E3F900FC387B /* hali.mp4 in Resources */,
+				202DD8C12716D7BB00FC387B /* 01_nebula.mp4 in Resources */,
 				202DD85F27118D1900FC387B /* LaunchScreen.storyboard in Resources */,
 				202DD85C27118D1900FC387B /* Assets.xcassets in Resources */,
 				202DD85A27118D1500FC387B /* Main.storyboard in Resources */,
@@ -284,12 +333,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				202DD87727118DD900FC387B /* CaptureViewController.swift in Sources */,
+				202DD8FF2718102100FC387B /* TrailorSideView.swift in Sources */,
 				202DD87C2713D42400FC387B /* CaptureManager.swift in Sources */,
+				202DD8BB2716C3F000FC387B /* TailorViewController.swift in Sources */,
 				202DD85727118D1500FC387B /* ViewController.swift in Sources */,
 				202DD87E2713D48600FC387B /* FaceRecognitionViewController.swift in Sources */,
 				202DD87827118DD900FC387B /* FilterSettingView.swift in Sources */,
 				202DD85327118D1500FC387B /* AppDelegate.swift in Sources */,
 				202DD87927118DD900FC387B /* XFilter.swift in Sources */,
+				202DD8BF2716CC0C00FC387B /* HSScreen.swift in Sources */,
 				202DD85527118D1500FC387B /* SceneDelegate.swift in Sources */,
 				202DD87627118DD900FC387B /* WriteVideo.swift in Sources */,
 				202DD87327118DD900FC387B /* SpeechSynthesisViewController.swift in Sources */,
