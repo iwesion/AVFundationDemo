@@ -89,13 +89,10 @@ class TrailorSideView: UIView {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let leftX:CGFloat = ( left.center.x - 25) / (self.bounds.width - 100)
-        let rightX:CGFloat = (right.center.x - 25) / (self.bounds.width - 100)
+        let leftX:CGFloat = ( left.frame.origin.x) / (self.bounds.width - 100)
+        let rightX:CGFloat = (right.frame.origin.x) / (self.bounds.width - 50)
         
         
         delegate?.callBackStartAndEndTime(leftX, rightX)
-        
-        print(leftX)
-        
     }
 }

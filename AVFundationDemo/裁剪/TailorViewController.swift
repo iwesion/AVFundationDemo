@@ -194,6 +194,7 @@ class TailorViewController: UIViewController {
 
 extension TailorViewController: TrailorSideViewDelegate {
     func callBackStartAndEndTime(_ start: CGFloat, _ end: CGFloat) {
+        print("\(start)到\(end)")
         startTime = CMTimeMakeWithSeconds( start * CGFloat(videoTotalTime)  , preferredTimescale: asset.duration.timescale)
         durationTime = CMTimeMakeWithSeconds(end * CGFloat(videoTotalTime) , preferredTimescale: asset.duration.timescale)
 //        let timeRange:CMTimeRange = CMTimeRangeMake(start: startTime!, duration: durationTime!)
