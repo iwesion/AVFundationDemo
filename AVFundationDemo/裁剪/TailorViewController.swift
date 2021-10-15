@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 import AVKit
+import AssetsLibrary
+import Photos
 class TailorViewController: UIViewController {
     
     
@@ -36,7 +38,11 @@ class TailorViewController: UIViewController {
             btn.setTitle("暂停", for: .selected)
             return btn
         }()
-    
+    let saveBtn:UIButton = {
+            let btn = UIButton.init(type: UIButton.ButtonType.custom )
+            btn.setTitle("裁剪", for: .normal)
+            return btn
+        }()
     
 
     var imgArr:[UIImageView] = []
@@ -76,6 +82,15 @@ class TailorViewController: UIViewController {
         playBtn.addTarget(self, action: #selector(chgSelectBtn(_:)), for: .touchUpInside)
         playBtn.snp.makeConstraints { make in
             make.bottom.equalTo(sideView).offset(-50)
+            make.centerX.equalTo(self.view)
+            make.width.equalTo(150)
+            make.height.equalTo(50)
+        }
+        self.view.addSubview(saveBtn)
+        saveBtn.backgroundColor = .red
+        saveBtn.addTarget(self, action: #selector(saveSelectBtn(_:)), for: .touchUpInside)
+        saveBtn.snp.makeConstraints { make in
+            make.bottom.equalTo(playBtn).offset(-50)
             make.centerX.equalTo(self.view)
             make.width.equalTo(150)
             make.height.equalTo(50)
@@ -190,6 +205,58 @@ class TailorViewController: UIViewController {
             player.pause()
         }
     }
+    @objc func saveSelectBtn(_ sender:UIButton) {
+        let timeRange:CMTimeRange = CMTimeRangeMake(start: startTime!, duration: durationTime!)
+        print("timeRange = \(timeRange)")
+        guard let exporter:AVAssetExportSession = .init(asset: asset, presetName: AVAssetExportPreset640x480) else{
+            print("初始化exporter失败")
+            return
+        }
+        //优化网络
+        exporter.shouldOptimizeForNetworkUse = true;
+        //设置输出路径
+        
+        let fileURL = TailorViewController.createTemplateFileURL()
+        
+        exporter.outputURL = fileURL
+           //设置输出类型
+        exporter.outputFileType = .mp4;
+        exporter.timeRange = timeRange
+        exporter.exportAsynchronously {
+            DispatchQueue.main.async {
+                switch exporter.status {
+                case .failed:
+                    print("failed")
+                case .cancelled:
+                    print("cancelled")
+                case .completed:
+                    PHPhotoLibrary.shared().performChanges {
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+                    } completionHandler: { success, err in
+                        
+                    }
+
+                    print("completed")
+
+                default:
+                    break
+                }
+            }
+        }
+        
+    }
+    class func createTemplateFileURL() -> URL {
+        
+        NSHomeDirectory()
+        let path = NSTemporaryDirectory() + "writeTemp.mp4"
+        let fileURL = URL(fileURLWithPath: path)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            do { try FileManager.default.removeItem(at: fileURL) } catch {
+                
+            }
+        }
+        return fileURL
+    }
 }
 
 extension TailorViewController: TrailorSideViewDelegate {
@@ -197,19 +264,7 @@ extension TailorViewController: TrailorSideViewDelegate {
         print("\(start)到\(end)")
         startTime = CMTimeMakeWithSeconds( start * CGFloat(videoTotalTime)  , preferredTimescale: asset.duration.timescale)
         durationTime = CMTimeMakeWithSeconds(end * CGFloat(videoTotalTime) , preferredTimescale: asset.duration.timescale)
-//        let timeRange:CMTimeRange = CMTimeRangeMake(start: startTime!, duration: durationTime!)
-//        var exporter:AVAssetExportSession = .init(asset: asset, presetName: "presetName")!
-//        //优化网络
-//           exporter.shouldOptimizeForNetworkUse = true;
-//        //设置输出路径
-////           exporter.outputURL = compressionFileURL;
-//           //设置输出类型
-////        exporter.outputFileType = .;
-//        exporter.timeRange = timeRange
-//        exporter.exportAsynchronously {
-//            <#code#>
-//        }
-//        print(timeRange)
+       
         player.seek(to: startTime!)
        
     }
