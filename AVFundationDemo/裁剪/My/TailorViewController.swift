@@ -153,10 +153,10 @@ class TailorViewController: UIViewController {
         player = AVPlayer.init(playerItem: self.palyerItem)
         player.rate = 1.0//播放速度 播放前设置
         player.addPeriodicTimeObserver(forInterval: .init(value: CMTimeValue(1.0), timescale: CMTimeScale(1.0)), queue: DispatchQueue.main) {[weak self] timex in
-            
-            if self!.durationTime != nil {
-                if timex >= self!.durationTime! {
-                    self!.player.pause()
+            guard let weakSelf = self else { return  }
+            if weakSelf.durationTime != nil {
+                if timex >= weakSelf.durationTime! {
+                    weakSelf.player.pause()
                 }
             }
            
