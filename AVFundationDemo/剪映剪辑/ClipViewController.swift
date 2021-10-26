@@ -23,6 +23,8 @@ class ClipViewController: UIViewController {
     var videoTimeScale = 1
     //视频缩略图数组
     var imgArr:[CGImage] = []
+    //判断自动播放还是手动滚动
+    var isScrollBySelf:Bool = false
     
     
     /// 播放控制按钮
@@ -40,6 +42,13 @@ class ClipViewController: UIViewController {
         lab.font = .systemFont(ofSize: 14)
         return lab
     }()
+    var centerLine:UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+        
+    }()
+    
     var collectionView:UICollectionView!
     
     
@@ -51,8 +60,9 @@ class ClipViewController: UIViewController {
         }
 
         let fileURL:URL = URL(fileURLWithPath: filePath)
-        addAVPlayer(fileURL)
         gotAsset(fileURL)
+        addAVPlayer(fileURL)
+        
         addUI()
         
     }
@@ -62,12 +72,13 @@ class ClipViewController: UIViewController {
         //创建ACplayer：负责视频播放
         player = AVPlayer.init(playerItem: self.palyerItem)
         player.rate = 1.0//播放速度 播放前设置
-        player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 60), queue: DispatchQueue.main) { [weak self] (time) in
+        player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: asset.duration.timescale), queue: DispatchQueue.main) { [weak self] (time) in
             guard let weakself = self else { return  }
             weakself.timeLab.text = "\(time.value / Int64(time.timescale))/\(weakself.asset.duration.value / Int64( weakself.asset.duration.timescale))"
-            weakself.collectionView.contentOffset.x = CGFloat(time.value / Int64(time.timescale)) * 50.0
-            print("进度---\(time.value)---\(time.timescale)")
-//            print(CGFloat(time.value)/CGFloat(time.timescale))
+            
+            let x = CGFloat(time.value)/CGFloat(time.timescale) * 50
+            print("进度---\( x/50)")
+            weakself.collectionView.contentOffset.x = x
         }
         //创建显示视频的图层
         let playerLayer = AVPlayerLayer.init(player: player)
@@ -130,7 +141,14 @@ class ClipViewController: UIViewController {
             make.centerY.equalTo(playButton)
             make.left.equalTo(30)
         }
+       
         initCollectionView()
+        self.view.addSubview(centerLine)
+        centerLine.snp.makeConstraints { make in
+            make.center.equalTo(self.collectionView)
+            make.width.equalTo(2)
+            make.height.equalTo(140)
+        }
     }
     func initCollectionView() {
         
@@ -144,11 +162,14 @@ class ClipViewController: UIViewController {
         flowLayout.minimumLineSpacing = CGFloat(0)
         flowLayout.minimumInteritemSpacing = CGFloat(0)
         flowLayout.scrollDirection = .horizontal
-        // 2.创建CollectionView
+        //设置headerView大小
+        flowLayout.headerReferenceSize = CGSize(width: screen.width()/2, height: 100)
+        //设置footerView大小
+        flowLayout.footerReferenceSize = CGSize(width: screen.width()/2, height: 100)
         
         // 创建CollectionView并应用布局
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor.black
         collectionView.register(ClipVCCollectionCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -200,13 +221,58 @@ extension ClipViewController:UICollectionViewDelegate,UICollectionViewDataSource
         return cell
         
     }
-    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
+    {
+            return 1
+    }
+      
+    // 返回HeadView的宽高
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
+    {
+        return CGSize(width: screen.width()/2, height: 100)
+    }
+        
+    // 返回footview的宽高
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize
+    {
+        return CGSize(width: screen.width()/2, height: 100)
+    }
+        
+    // 返回自定义HeadView或者FootView
+    private func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
+    {
+            var reusableview:UICollectionReusableView!
+
+        if kind == UICollectionView.elementKindSectionHeader
+        {
+            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ClipCollectionViewHeader", for: indexPath as IndexPath) as! ClipCollectionViewHeader
+            
+        }
+        else if kind == UICollectionView.elementKindSectionFooter
+        {
+            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ClipCollectionViewHeader", for: indexPath as IndexPath) as! ClipCollectionViewHeader
+        }
+        reusableview.backgroundColor = .black
+        return reusableview
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let time:CMTime = CMTimeMakeWithSeconds(Float64(Int(scrollView.contentOffset.x)/50*videoTimeScale), preferredTimescale: asset.duration.timescale)
+        
+        let seconds:Float = Float(scrollView.contentOffset.x) / Float(50) * Float(videoTimeScale)
+        
+        
+        let time:CMTime = CMTimeMakeWithSeconds(Float64(seconds), preferredTimescale: asset.duration.timescale)
         print(Float64(scrollView.contentOffset.x/50))
-//        player.seek(to: time)
-        player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
+        
+        
+        if scrollView.isDragging || scrollView.isDecelerating {
+            player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
+
+        }
+//
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        player.pause()
     }
 }
 
@@ -223,4 +289,27 @@ class ClipVCCollectionCell: UICollectionViewCell {
         }
         return imageView
     }()
+}
+
+class ClipCollectionViewHeader : UICollectionReusableView {
+    lazy var title: UILabel = {
+        let lab = UILabel()
+        lab.text = "这是标题"
+        lab.textColor = .white
+        self.addSubview(lab)
+        lab.snp.makeConstraints { (make) in
+            make.edges.equalTo(self)
+        }
+        return lab
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .black
+        self.addSubview(title)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
