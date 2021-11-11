@@ -25,6 +25,8 @@
 		202DD8C12716D7BB00FC387B /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 202DD8C02716D17C00FC387B /* 01_nebula.mp4 */; };
 		202DD8C32716E3F900FC387B /* hali.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 202DD8C22716E3E200FC387B /* hali.mp4 */; };
 		202DD8FF2718102100FC387B /* TrailorSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202DD8FE2718102100FC387B /* TrailorSideView.swift */; };
+		2035D965273A6EE400C69FB1 /* PasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035D964273A6EE400C69FB1 /* PasterViewController.swift */; };
+		2035D9B7273D1D2200C69FB1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2035D9B6273D1D2200C69FB1 /* SnapKit */; };
 		208F6B32271E9EA4009AA911 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208F6B2F271E9EA4009AA911 /* DisplayViewController.swift */; };
 		208F6B33271E9EA4009AA911 /* PickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208F6B30271E9EA4009AA911 /* PickingViewController.swift */; };
 		208F6B34271E9EA4009AA911 /* VideoLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208F6B31271E9EA4009AA911 /* VideoLine.swift */; };
@@ -53,6 +55,7 @@
 		202DD8C02716D17C00FC387B /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
 		202DD8C22716E3E200FC387B /* hali.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hali.mp4; sourceTree = "<group>"; };
 		202DD8FE2718102100FC387B /* TrailorSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailorSideView.swift; sourceTree = "<group>"; };
+		2035D964273A6EE400C69FB1 /* PasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasterViewController.swift; sourceTree = "<group>"; };
 		208F6B2F271E9EA4009AA911 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		208F6B30271E9EA4009AA911 /* PickingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickingViewController.swift; sourceTree = "<group>"; };
 		208F6B31271E9EA4009AA911 /* VideoLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLine.swift; sourceTree = "<group>"; };
@@ -68,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39D42C2C927F396930A97237 /* Pods_AVFundationDemo.framework in Frameworks */,
+				2035D9B7273D1D2200C69FB1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +99,7 @@
 		202DD85127118D1500FC387B /* AVFundationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2035D963273A6E7100C69FB1 /* 添加图片 */,
 				208F6B83271FEC21009AA911 /* 剪映剪辑 */,
 				202DD8BD2716CBE800FC387B /* Helper */,
 				202DD8BC2716C8C000FC387B /* Resource */,
@@ -207,6 +212,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2035D963273A6E7100C69FB1 /* 添加图片 */ = {
+			isa = PBXGroup;
+			children = (
+				2035D964273A6EE400C69FB1 /* PasterViewController.swift */,
+			);
+			path = "添加图片";
+			sourceTree = "<group>";
+		};
 		208F6B35271EA8E5009AA911 /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,13 +275,15 @@
 				202DD84B27118D1500FC387B /* Sources */,
 				202DD84C27118D1500FC387B /* Frameworks */,
 				202DD84D27118D1500FC387B /* Resources */,
-				973D034AB438562ACFB5B4BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = AVFundationDemo;
+			packageProductDependencies = (
+				2035D9B6273D1D2200C69FB1 /* SnapKit */,
+			);
 			productName = AVFundationDemo;
 			productReference = 202DD84F27118D1500FC387B /* AVFundationDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -297,6 +312,9 @@
 				Base,
 			);
 			mainGroup = 202DD84627118D1500FC387B;
+			packageReferences = (
+				2035D9B5273D1D2200C69FB1 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+			);
 			productRefGroup = 202DD85027118D1500FC387B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,23 +362,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		973D034AB438562ACFB5B4BD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AVFundationDemo/Pods-AVFundationDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AVFundationDemo/Pods-AVFundationDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AVFundationDemo/Pods-AVFundationDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -381,6 +382,7 @@
 				208F6B34271E9EA4009AA911 /* VideoLine.swift in Sources */,
 				202DD85327118D1500FC387B /* AppDelegate.swift in Sources */,
 				202DD87927118DD900FC387B /* XFilter.swift in Sources */,
+				2035D965273A6EE400C69FB1 /* PasterViewController.swift in Sources */,
 				202DD8BF2716CC0C00FC387B /* HSScreen.swift in Sources */,
 				202DD85527118D1500FC387B /* SceneDelegate.swift in Sources */,
 				202DD87627118DD900FC387B /* WriteVideo.swift in Sources */,
@@ -606,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2035D9B5273D1D2200C69FB1 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2035D9B6273D1D2200C69FB1 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2035D9B5273D1D2200C69FB1 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 202DD84727118D1500FC387B /* Project object */;
 }

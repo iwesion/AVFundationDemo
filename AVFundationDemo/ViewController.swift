@@ -10,7 +10,7 @@ import AVFoundation
 import SnapKit
 class ViewController: UIViewController{
     
-    let arr = ["语音合成","滤镜","人脸识别","裁剪1","裁剪2","剪辑"]
+    let arr = ["语音合成","滤镜","人脸识别","裁剪1","裁剪2","剪辑","贴纸"]
     
     lazy var engine = AVAudioEngine()
     lazy var mixer = AVAudioMixerNode()
@@ -50,6 +50,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         let tailorVC = TailorViewController.init()
         let pickingVC = PickingViewController.init()
         let clipVC = ClipViewController.init()
+        let paster = PasterViewController.init()
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(speechSynthesisVC, animated: true)
         }else if (indexPath.row == 1){
@@ -60,8 +61,10 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(tailorVC, animated: true)
         }else if(indexPath.row == 4){
             self.navigationController?.pushViewController(pickingVC, animated: true)
-        }else{
+        }else if (indexPath.row == 5){
             self.navigationController?.pushViewController(clipVC, animated: true)
+        }  else{
+            self.navigationController?.pushViewController(paster, animated: true)
             
         }
         
